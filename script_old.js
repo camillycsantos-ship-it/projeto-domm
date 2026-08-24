@@ -14,19 +14,18 @@ const titulo = document.querySelector('.app__title')
 //TIMER
 const displayTimer = document.querySelector('#timer')
 
+//CRIAR OS OUVINTES DE EVENTOS
 focoBt.addEventListener('click', () => {
-    alterarContexto('foco');
+    html.setAttribute('data-contexto', 'foco')
+    banner.setAttribute('src','/imagens/foco.png')
 })
 
 curtoBt.addEventListener('click', () => {
-    alterarContexto('descanso-curto');
+    html.setAttribute('data-contexto', 'descanso-curto')
+    banner.setAttribute('src', '/imagens/descanso-curto.png')
 })
 
 longoBt.addEventListener('click', () => {
-    alterarContexto('descanso-longo');
+    html.setAttribute('data-contexto', 'descanso-longo')
+    banner.setAttribute('src','/imagens/descanso-longo.png')
 })
-
-function alterarContexto(contexto){
-    html.setAttribute('data-contexto', contexto)
-    banner.setAttribute('src', `/imagens/${contexto}.png`)
-}

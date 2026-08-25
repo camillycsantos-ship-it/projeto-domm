@@ -43,7 +43,7 @@ function alterarContexto(contexto){
             titulo.innerHTML =
             `
             Que tal dar uma respirada?<br>
-            <strong class="app__title-strong">Que tal dar uma pausa curta?.</strong>
+            <strong class="app__title-strong">Faça uma pausa curta.</strong>
             `
             break;
 

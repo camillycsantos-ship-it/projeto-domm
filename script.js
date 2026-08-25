@@ -7,7 +7,11 @@ const curtoBt = document.querySelector('.app__card-button--curto');
 const longoBt = document.querySelector('.app__card-button--longo');
 const botaoIniciar = document.querySelector('.app__card-primary-button')
 const botoes = document.querySelectorAll('.app__card-button')
+const startPauseBt = document.querySelector('#start-pause')
 
+
+//CONTADOR
+let tempoDecorrido = 1500 //em segundos
 
 //AUDIOS
 
@@ -78,4 +82,23 @@ botoes.forEach(function (botao){
             `
             break;
     }
+}
+
+const contagemRegressiva() => {
+    if(tempoDecorrido <= 0){
+        zerar()//falta criar
+        alert('Tempo FInalizado')
+        return
+    }
+    tempoDecorrido -= 1
+}
+
+startPauseBt.addEventListener('click', iniciar)
+function iniciar(){
+    intervaloId = setInterval(contagemRegressiva, 1000) //milisegundos
+}
+
+function zerar(){
+    clearInterval(intervaloId)
+    intervaloId = null
 }

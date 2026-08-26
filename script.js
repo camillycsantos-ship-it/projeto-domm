@@ -9,10 +9,12 @@ const botaoIniciar = document.querySelector('.app__card-primary-button')
 const botoes = document.querySelectorAll('.app__card-button')
 const startPauseBt = document.querySelector('#start-pause')
 const comecarPausarBt = document.querySelector('#start-pause span')
+const comecarPausarBtIcone = document.querySelector('.app__card-primary-butto-icon')
 
-//CONTADOR
+//CONTADOR - PARTE I
 let tempoDecorrido = 1500 //em segundos
 let intervaloId = null
+const tempoNaTela = document.querySelector('#timer')
 
 //AUDIOS
 const musicaFocoInput = document.querySelector('#alternar-musica')
@@ -37,23 +39,28 @@ const titulo = document.querySelector('.app__title')
 const displayTimer = document.querySelector('#timer')
 
 focoBt.addEventListener('click', () => {
+    tempoDecorrido = 1500 // 25 minutos
     alterarContexto('foco');
     focoBt.classList.add('active')
 })
 
 curtoBt.addEventListener('click', () => {
+    tempoDecorrido = 300 //5 minutos
     alterarContexto('descanso-curto');
     curtoBt.classList.add('active')
 })
 
 longoBt.addEventListener('click', () => {
+    tempoDecorrido = 900 // 15 minutos
     alterarContexto('descanso-longo');
     longoBt.classList.add('active')
 })
 
 function alterarContexto(contexto){
 
-botoes.forEach(function (botao){
+    mostrarCronometro();
+
+    botoes.forEach(function (botao){
     botao.classList.remove('active')
 })
 
@@ -95,6 +102,7 @@ const contagemRegressiva = () => {
         return
     }
     tempoDecorrido -= 1
+    mostrarCronometro()
     console.log('Temporizador: ' + tempoDecorrido)
 }
 
@@ -108,6 +116,7 @@ function iniciarOuPausar(){
     }
     audioPlay.play();
     comecarPausarBt.textContent = "Pausar"
+    comecarPausarBtIcone.setAttribute('src', `/imagens/pause.png`)
     intervaloId = setInterval(contagemRegressiva, 1000)
 }
 
@@ -115,4 +124,12 @@ function zerar(){
     clearInterval(intervaloId)
     intervaloId = null
     comecarPausarBt.textContent = "Começar"
+    comecarPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`)
 }
+
+function mostrarCronometro(){
+    const tempo = new Date(tempoDecorrido * 1000)
+    const tempoFormat = tempo.toLocaleTimeString('pt-BR', {minute:'2-digit', second: '2-digit'})
+    tempoNaTela.innerHTML = `${tempoFormat}`
+}
+mostrarCronometro();
